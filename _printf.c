@@ -1,4 +1,5 @@
 #include "main.h"
+
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
@@ -16,6 +17,10 @@ int _printf(const char *format, ...)
 	va_list list;
 
 	char buffer[BUFF_SIZE];
+
+	if (format == NULL)
+		return (-1);
+	va_Start(list, format);
 
 	for (i = 0; format && format[i] != '\0'; i++)
 	{
@@ -54,7 +59,9 @@ int _printf(const char *format, ...)
  * @buff_ind: Index at which to add next char, represents the length,
  */
 
-void print_buffer(char buffer[], int *buff_ind);
-
-*buff_ind = 0;
+void print_buffer(char buffer[], int *buff_ind)
+{
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
+	*buff_ind = 0;
 }
